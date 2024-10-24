@@ -26,9 +26,6 @@ class AccountPage:
     balanceBeforeDepositValue = 0
     balanceAfterDepositValue = 0
 
-    Test1_AmountToDepositValue = 1500
-    Test2_AmountToDepositValue = 1500
-    Test3_AmountToDepositValue = 31459
 
     def __init__(self, driver):
         self.driver = driver
@@ -55,3 +52,18 @@ class AccountPage:
         if check_element_presence(self.driver, self.buttonDeposit_xpath):
             # Click deposit tab btn
             wait.until(EC.presence_of_element_located(self.buttonDeposit_xpath)).click()
+
+
+    def enterAmountToDeposit(self, amountToDepositValue):
+        wait = WebDriverWait(self.driver, 1)
+        # Check for amount_element
+        if check_element_presence(self.driver, self.inputAmount_xpath):
+            # Enter amount
+            wait.until(EC.presence_of_element_located(self.inputAmount_xpath)).send_keys(str(amountToDepositValue))
+
+    def clickDepositSubmitButtion(self):
+        wait = WebDriverWait(self.driver, 1)
+        # Check for deposit_submit_element
+        if check_element_presence(self.driver, self.buttonDeposit_submit_xpath):
+            # Click deposit Submit btn
+            wait.until(EC.presence_of_element_located(self.buttonDeposit_submit_xpath)).click()
