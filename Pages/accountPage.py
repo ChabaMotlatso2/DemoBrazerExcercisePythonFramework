@@ -85,3 +85,11 @@ class AccountPage:
                 print("Deposit was Successful.")
             else:
                 print("Deposit failed.")
+
+
+    def clickLogoutButton(self):
+        wait = WebDriverWait(self.driver, 1)
+        # Check for logout_element
+        if check_element_presence(self.driver, self.buttonLogout_xpath):
+            # Click deposit Submit btn
+            wait.until(EC.presence_of_element_located(self.buttonLogout_xpath)).click()
