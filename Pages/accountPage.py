@@ -48,3 +48,10 @@ class AccountPage:
         if check_element_presence(self.driver, self.textBalanceBeforeDeposit_xpath):
             balanceBeforeDepositValue = int(wait.until(EC.presence_of_element_located(self.textBalanceBeforeDeposit_xpath)).text)
 
+
+    def clickDepositTabButton(self):
+        wait = WebDriverWait(self.driver, 1)
+        # Check for deposit_element
+        if check_element_presence(self.driver, self.buttonDeposit_xpath):
+            # Click deposit tab btn
+            wait.until(EC.presence_of_element_located(self.buttonDeposit_xpath)).click()
