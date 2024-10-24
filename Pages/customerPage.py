@@ -5,8 +5,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
 
 class CustomerPage:
-    button_customerLogin_xpath = (By.XPATH, "//button[contains(.,'Customer Login')]")
-
     selectUser_xpath  = (By.XPATH, "//select[@id='userSelect']")
     button_login_xpath  = (By.XPATH, "//button[contains(.,'Login')]")
 
