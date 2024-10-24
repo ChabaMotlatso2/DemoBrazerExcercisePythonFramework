@@ -38,6 +38,14 @@ class Tests:
         self.account.clickLogoutButton()
 
 
+    @pytest.mark.test2
+    @allure.severity(allure.severity_level.MINOR)
+    def test_2(self, setup):
+        self.driver = setup
+        self.driver.get(self.demoBrazerURL)
+        self.driver.maximize_window()
+
+
 
 
 
