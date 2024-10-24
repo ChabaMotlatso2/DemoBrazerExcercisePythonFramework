@@ -1,6 +1,7 @@
 import allure
 import pytest
 
+from Pages.accountPage import AccountPage
 from Pages.customerPage import CustomerPage
 from Pages.loginPage import LoginPage
 from Utils.readProperties import ReadConfigs
@@ -18,6 +19,7 @@ class Tests:
 
         self.login = LoginPage(self.driver)
         self.customerLogin = CustomerPage(self.driver)
+        self.account = AccountPage(self.driver)
 
         self.login.clickCustomerLoginButton()
         self.customerLogin.selectUserLogin()
