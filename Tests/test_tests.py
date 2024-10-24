@@ -23,6 +23,10 @@ class Tests:
         self.customerLogin.selectUserLogin()
         self.customerLogin.clickLoginButton()
 
+        # initialize amounts
+        balanceBeforeDepositValue = 0
+        balanceAfterDepositValue = 0
+
 
 
 

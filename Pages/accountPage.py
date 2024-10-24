@@ -22,10 +22,6 @@ class AccountPage:
 
     buttonLogout_xpath = (By.XPATH, "//button[contains(.,'Logout')]")
 
-    #initialize amounts
-    balanceBeforeDepositValue = 0
-    balanceAfterDepositValue = 0
-
 
     def __init__(self, driver):
         self.driver = driver
@@ -43,7 +39,7 @@ class AccountPage:
     def getBalanceBeforeTheDeposit(self):
         wait = WebDriverWait(self.driver, 1)
         if check_element_presence(self.driver, self.textBalanceBeforeDeposit_xpath):
-            balanceBeforeDepositValue = int(wait.until(EC.presence_of_element_located(self.textBalanceBeforeDeposit_xpath)).text)
+            return int(wait.until(EC.presence_of_element_located(self.textBalanceBeforeDeposit_xpath)).text)
 
 
     def clickDepositTabButton(self):
@@ -72,6 +68,20 @@ class AccountPage:
         wait = WebDriverWait(self.driver, 1)
         # Check for balanceAfterDeposit_element
         if check_element_presence(self.driver, self.textBalanceAfterDeposit_xpath):
-            balanceAfterDepositValue = int(wait.until(EC.presence_of_element_located(self.textBalanceAfterDeposit_xpath)).text)
+            return int(wait.until(EC.presence_of_element_located(self.textBalanceAfterDeposit_xpath)).text)
 
 
+    def verifyIfDepositWasSuccessful(self, balanceAfterDepositValue, balanceBeforeDepositValue, amountToDepositValue ):
+        wait = WebDriverWait(self.driver, 1)
+        if check_element_presence(self.driver, self.textSuccessfulDepositedMessage_xpath):
+
+            # print("balanceAfterDepositValue = " , balanceAfterDepositValue)
+            # print("balanceBeforeDepositValue = " , balanceBeforeDepositValue)
+            # print("amountToDepositValue = " , amountToDepositValue)
+
+            if (wait.until(
+                    EC.presence_of_element_located(self.textSuccessfulDepositedMessage_xpath)).text == 'Deposit Successful'
+                    and balanceAfterDepositValue == balanceBeforeDepositValue + amountToDepositValue):
+                print("Deposit was Successful.")
+            else:
+                print("Deposit failed.")
