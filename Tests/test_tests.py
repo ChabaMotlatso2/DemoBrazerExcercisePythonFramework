@@ -25,9 +25,19 @@ class Tests:
         self.customerLogin.selectUserLogin()
         self.customerLogin.clickLoginButton()
 
-        # initialize amounts
-        balanceBeforeDepositValue = 0
-        balanceAfterDepositValue = 0
+        # initialize amount to deposit
+        amountToDeposit = 1500
+
+        self.account.selectFirstAccount()
+        balanceBeforeDepositValue = self.account.getBalanceBeforeTheDeposit()
+        self.account.clickDepositTabButton()
+        self.account.enterAmountToDeposit(amountToDeposit)
+        self.account.clickDepositSubmitButtion()
+        balanceAfterDepositValue = self.account.getBalanceAfterTheDeposit()
+        self.account.verifyIfDepositWasSuccessful(balanceBeforeDepositValue, balanceAfterDepositValue, amountToDeposit)
+        self.account.clickLogoutButton()
+
+
 
 
 
