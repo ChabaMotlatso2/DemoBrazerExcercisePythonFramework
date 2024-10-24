@@ -24,6 +24,8 @@ class AccountPage:
 
     buttonLogout_xpath = (By.XPATH, "//button[contains(.,'Logout')]")
 
+    buttonTransactions_xpath = (By.XPATH, "//button[contains(.,'Transactions')]")
+
 
     def __init__(self, driver):
         self.driver = driver
@@ -117,3 +119,10 @@ class AccountPage:
                 self.clickDepositSubmitButtion()
                 balanceAfterDepositValue = self.getBalanceAfterTheDeposit()
                 self.verifyIfDepositWasSuccessful(balanceBeforeDepositValue, balanceAfterDepositValue, amountToDeposit)
+
+    def clickTransactionsTabButton(self):
+        wait = WebDriverWait(self.driver, 1)
+        # Check for transactions_element
+        if check_element_presence(self.driver, self.buttonTransactions_xpath):
+            # Click Transactions btn
+            wait.until(EC.presence_of_element_located(self.buttonTransactions_xpath)).click()
