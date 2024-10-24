@@ -45,6 +45,19 @@ class Tests:
         self.driver.get(self.demoBrazerURL)
         self.driver.maximize_window()
 
+        self.login = LoginPage(self.driver)
+        self.customerLogin = CustomerPage(self.driver)
+        self.account = AccountPage(self.driver)
+
+        self.login.clickCustomerLoginButton()
+        self.customerLogin.selectUserLogin()
+        self.customerLogin.clickLoginButton()
+
+        amountToDepositValue = 1500
+
+        self.account.selectAllAccount(amountToDepositValue)
+
+        self.account.clickLogoutButton()
 
 
 
