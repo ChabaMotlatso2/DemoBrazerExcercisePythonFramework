@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from Pages.checkElementPresence import check_element_presence
@@ -92,3 +94,26 @@ class AccountPage:
         if check_element_presence(self.driver, self.buttonLogout_xpath):
             # Click deposit Submit btn
             wait.until(EC.presence_of_element_located(self.buttonLogout_xpath)).click()
+
+
+    def selectAllAccount(self, amountToDeposit):
+        wait = WebDriverWait(self.driver, 1)
+        # Check for customerLogin_element
+        if check_element_presence(self.driver, self.selectAccount_xpath):
+            # Create a Select object
+            select_element = Select(self.driver.find_element(*self.selectAccount_xpath))
+
+            # Loop through all options within the select element
+            for option in select_element.options:
+                time.sleep(1)
+
+                option.click()
+
+                time.sleep(2)  # Add a delay
+
+                balanceBeforeDepositValue = self.getBalanceBeforeTheDeposit()
+                self.clickDepositTabButton()
+                self.enterAmountToDeposit(amountToDeposit)
+                self.clickDepositSubmitButtion()
+                balanceAfterDepositValue = self.getBalanceAfterTheDeposit()
+                self.verifyIfDepositWasSuccessful(balanceBeforeDepositValue, balanceAfterDepositValue, amountToDeposit)
