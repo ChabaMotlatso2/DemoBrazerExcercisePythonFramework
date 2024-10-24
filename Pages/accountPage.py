@@ -101,7 +101,7 @@ class AccountPage:
         # Check for customerLogin_element
         if check_element_presence(self.driver, self.selectAccount_xpath):
             # Create a Select object
-            select_element = Select(self.driver.find_element(*self.selectAccount_xpath))
+            select_element = Select(wait.until(EC.presence_of_element_located(self.selectAccount_xpath)))
 
             # Loop through all options within the select element
             for option in select_element.options:
