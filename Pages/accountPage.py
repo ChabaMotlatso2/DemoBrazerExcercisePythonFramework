@@ -67,3 +67,11 @@ class AccountPage:
         if check_element_presence(self.driver, self.buttonDeposit_submit_xpath):
             # Click deposit Submit btn
             wait.until(EC.presence_of_element_located(self.buttonDeposit_submit_xpath)).click()
+
+    def getBalanceAfterTheDeposit(self):
+        wait = WebDriverWait(self.driver, 1)
+        # Check for balanceAfterDeposit_element
+        if check_element_presence(self.driver, self.textBalanceAfterDeposit_xpath):
+            balanceAfterDepositValue = int(wait.until(EC.presence_of_element_located(self.textBalanceAfterDeposit_xpath)).text)
+
+
