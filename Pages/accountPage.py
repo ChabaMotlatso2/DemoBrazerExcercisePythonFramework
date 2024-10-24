@@ -43,6 +43,8 @@ class AccountPage:
             # Select the first option (index 0)
             select.select_by_index(0)
 
-
-
+    def getBalanceBeforeTheDeposit(self):
+        wait = WebDriverWait(self.driver, 1)
+        if check_element_presence(self.driver, self.textBalanceBeforeDeposit_xpath):
+            balanceBeforeDepositValue = int(wait.until(EC.presence_of_element_located(self.textBalanceBeforeDeposit_xpath)).text)
 
