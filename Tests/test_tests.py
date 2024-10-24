@@ -61,6 +61,24 @@ class Tests:
 
 
 
+    @pytest.mark.test3
+    @allure.severity(allure.severity_level.MINOR)
+    def test_3(self, setup):
+        self.driver = setup
+        self.driver.get(self.demoBrazerURL)
+        self.driver.maximize_window()
+
+        self.login = LoginPage(self.driver)
+        self.customerLogin = CustomerPage(self.driver)
+        self.account = AccountPage(self.driver)
+
+        self.login.clickCustomerLoginButton()
+        self.customerLogin.selectUserLogin()
+        self.customerLogin.clickLoginButton()
+
+
+
+
 
 
 
