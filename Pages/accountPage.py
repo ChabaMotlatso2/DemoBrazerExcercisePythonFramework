@@ -26,6 +26,7 @@ class AccountPage:
     def __init__(self, driver):
         self.driver = driver
 
+
     def selectFirstAccount(self):
         wait = WebDriverWait(self.driver, 1)
         # Check for customerLogin_element
@@ -35,6 +36,7 @@ class AccountPage:
 
             # Select the first option (index 0)
             select.select_by_index(0)
+
 
     def getBalanceBeforeTheDeposit(self):
         wait = WebDriverWait(self.driver, 1)
@@ -57,12 +59,14 @@ class AccountPage:
             # Enter amount
             wait.until(EC.presence_of_element_located(self.inputAmount_xpath)).send_keys(str(amountToDepositValue))
 
+
     def clickDepositSubmitButtion(self):
         wait = WebDriverWait(self.driver, 1)
         # Check for deposit_submit_element
         if check_element_presence(self.driver, self.buttonDeposit_submit_xpath):
             # Click deposit Submit btn
             wait.until(EC.presence_of_element_located(self.buttonDeposit_submit_xpath)).click()
+
 
     def getBalanceAfterTheDeposit(self):
         wait = WebDriverWait(self.driver, 1)
@@ -74,11 +78,6 @@ class AccountPage:
     def verifyIfDepositWasSuccessful(self, balanceAfterDepositValue, balanceBeforeDepositValue, amountToDepositValue ):
         wait = WebDriverWait(self.driver, 1)
         if check_element_presence(self.driver, self.textSuccessfulDepositedMessage_xpath):
-
-            # print("balanceAfterDepositValue = " , balanceAfterDepositValue)
-            # print("balanceBeforeDepositValue = " , balanceBeforeDepositValue)
-            # print("amountToDepositValue = " , amountToDepositValue)
-
             if (wait.until(
                     EC.presence_of_element_located(self.textSuccessfulDepositedMessage_xpath)).text == 'Deposit Successful'
                     and balanceAfterDepositValue == balanceBeforeDepositValue + amountToDepositValue):
