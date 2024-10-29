@@ -1,5 +1,7 @@
 import time
 
+import allure
+from allure_commons.types import AttachmentType
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from Pages.checkElementPresence import check_element_presence
@@ -77,4 +79,6 @@ class TransactionListPage:
             else:
                 print(f'The value "{value_to_check}" does not exist in the transactions List.')
 
+            allure.attach(self.driver.get_screenshot_as_png(), name=f'Verify value "{value_to_check}" exists in the transactions List',
+                          attachment_type=AttachmentType.PNG)
         time.sleep(2)

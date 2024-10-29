@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 
 import allure
 import pytest
+from allure_commons.types import AttachmentType
 
 from Pages.accountPage import AccountPage
 from Pages.customerPage import CustomerPage
@@ -33,11 +34,13 @@ class Tests:
 
         self.account.selectFirstAccount()
         balanceBeforeDepositValue = self.account.getBalanceBeforeTheDeposit()
+        allure.attach(self.driver.get_screenshot_as_png(), name="Balance for Test 1 before deposit", attachment_type=AttachmentType.PNG)
         self.account.clickDepositTabButton()
         self.account.enterAmountToDeposit(amountToDeposit)
         self.account.clickDepositSubmitButtion()
         balanceAfterDepositValue = self.account.getBalanceAfterTheDeposit()
         self.account.verifyIfDepositWasSuccessful(balanceBeforeDepositValue, balanceAfterDepositValue, amountToDeposit)
+        allure.attach(self.driver.get_screenshot_as_png(), name="Verify If Deposit for Test 1 Was Successful", attachment_type=AttachmentType.PNG)
         self.account.clickLogoutButton()
 
 
@@ -86,6 +89,7 @@ class Tests:
 
         self.account.selectFirstAccount()
         balanceBeforeDepositValue = self.account.getBalanceBeforeTheDeposit()
+        allure.attach(self.driver.get_screenshot_as_png(), name="Balance for Test 3 before deposit", attachment_type=AttachmentType.PNG)
         self.account.clickDepositTabButton()
         self.account.enterAmountToDeposit(amountToDeposit)
         self.account.clickDepositSubmitButtion()

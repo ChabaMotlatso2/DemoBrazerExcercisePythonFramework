@@ -1,5 +1,7 @@
 import time
 
+import allure
+from allure_commons.types import AttachmentType
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from Pages.checkElementPresence import check_element_presence
@@ -114,11 +116,16 @@ class AccountPage:
                 time.sleep(2)  # Add a delay
 
                 balanceBeforeDepositValue = self.getBalanceBeforeTheDeposit()
+                allure.attach(self.driver.get_screenshot_as_png(),
+                              name=f'Balance for account "{option.text}" before deposit.',
+                              attachment_type=AttachmentType.PNG)
                 self.clickDepositTabButton()
                 self.enterAmountToDeposit(amountToDeposit)
                 self.clickDepositSubmitButtion()
                 balanceAfterDepositValue = self.getBalanceAfterTheDeposit()
                 self.verifyIfDepositWasSuccessful(balanceBeforeDepositValue, balanceAfterDepositValue, amountToDeposit)
+                allure.attach(self.driver.get_screenshot_as_png(), name=f'Verify If Deposit for account "{option.text}" for Was Successful.',
+                              attachment_type=AttachmentType.PNG)
 
     def clickTransactionsTabButton(self):
         wait = WebDriverWait(self.driver, 1)
